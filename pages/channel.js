@@ -1,3 +1,4 @@
+import 'isomorphic-fetch'
 import Link from 'next/link'
 
 export default class extends React.Component {
@@ -33,7 +34,7 @@ export default class extends React.Component {
         {
           audioClips.map(clip => {
             return (
-              <Link href={`/podcast/${clip.id}`} prefetch>
+              <Link href={`/podcast/${clip.id}`}>
                 <a className="channel">
                   <img src={clip.urls.image} />
                   <h2>{clip.title}</h2>
@@ -48,7 +49,7 @@ export default class extends React.Component {
         {
           series.map(serie => {
             return (
-              <Link href={`/podcast/${serie.id}`} prefetch>
+              <Link href={`/serie/${serie.id}`}>
                 <a className="channel">
                   <img src={serie.urls.logo_image.original} />
                   <h2>{serie.title}</h2>
