@@ -1,5 +1,7 @@
 import 'isomorphic-fetch'
-import Link from 'next/link'
+import Layout from '../components/Layout'
+import PodcastGrid from '../components/PodcastGrid'
+import ChannelGrid from '../components/ChannelGrid'
 
 export default class extends React.Component {
 
@@ -26,83 +28,23 @@ export default class extends React.Component {
 
   render() {
     const { channel, audioClips, series } = this.props
-    return <div>
-      <header>Podcast</header>
-      <h1>{channel.title}</h1>
-      <h3>Ultimos Podcast</h3>
-      <div className="channels">
-        {
-          audioClips.map(clip => {
-            return (
-              <Link href={`/podcast/${clip.id}`}>
-                <a className="channel">
-                  <img src={clip.urls.image} />
-                  <h2>{clip.title}</h2>
-                </a>
-              </Link>
-            )
-          })
-        }
-      </div>
-      <h3>Series</h3>
-      <div className="channels">
-        {
-          series.map(serie => {
-            return (
-              <Link href={`/serie/${serie.id}`}>
-                <a className="channel">
-                  <img src={serie.urls.logo_image.original} />
-                  <h2>{serie.title}</h2>
-                </a>
-              </Link>
-            )
-          })
-        }
-      </div>
-      <style jsx>{`
-          header {
-            color: #fff;
-            background: #8756ca;
-            padding: 15px;
-            text-align: center;
-          }
-          .channels {
-            display: grid;
-            grid-gap: 30px;
-            padding: 20px;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-          }
-          .channel {
-            display: block;
-            border-radius: 3px;
-            box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
-            margin-bottom: 0.5;
-          }
-          .channel img {
-            width: 100%;
-          }
-          h1 {
-            padding-left: 2%;
-          }
-          h2 {
-            padding: 5px;
-            font-size: 0.9em;
-            font-weight: 600;
-            margin: 0;
-            text-align: center;
-          }
-          h3 {
-            font-size: 1.5em;
-            padding-left: 2%;
-          }
-        `}</style>
-        <style jsx global>{`
-          body {
-            margin: 0;
-            font-family: system-ui;
-            background: white;
-          }  
-        `}</style>
-    </div>
+    return (
+      <Layout title={channel.title}>
+        <h1>{channel.title}</h1>
+        <h3>Ultimos Podcast</h3>
+        <PodcastGrid channels={audioClips} />
+        <h3>Series</h3>
+        <ChannelGrid channels={series} />
+        <style jsx>{`
+            h1 {
+              padding-left: 2%;
+            }
+            h3 {
+              font-size: 1.5em;
+              padding-left: 2%;
+            }
+          `}</style>
+      </Layout>
+    )
   }
 }
