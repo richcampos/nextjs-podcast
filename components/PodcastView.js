@@ -5,7 +5,7 @@ export default class PodcastView extends React.Component {
     const { clip } = this.props
 
     return (
-      <div clasName="modal">
+      <div className="modal">
         <div className="clip" >
           <nav>
             <Link href={`/channel?id=${clip.channel.id}`} >
